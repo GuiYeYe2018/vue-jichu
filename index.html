@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <title>first-vue</title>
+
+    <style>
+    .isAction{
+      color: aqua;
+    }
+
+
+    </style>
+  </head>
+
+  <body>
+  </script>
+  <script src="../firstVue/vue.js"></script>
+      <div id="app">
+        <ul>
+          <li :class="{isAction:isAction==index}"  v-for="(m,index) in message" @click="zhi(index)" >{{m}}</li>
+          <!-- isAction==index -->
+        </ul>
+
+        <input type="text" v-on:keydown="fun($event)">123</input>
+      <button v-on:click="bian">变色</button>
+      <button @click="qu($event)">eee</button>
+
+      <p :style="[color,fontSize]">qqqq</p>
+      <p >{{price}}</p>
+      <h1 v-if="panduan">qweqrtrwetwt</h1>
+      <h1 v-else>asdfghjk</h1>
+      <button @click="pan">if/else</button>
+
+      <h2>v-model 例子</h2>
+      <input type="text" v-model="message1">{{message1}}    <!-- 同步刷新 -->
+      <input type="text" v-model.lazy="messagelazy">{{messagelazy}} <!-- 懒刷新 -->
+      <input type="number" v-model.number="messagenumber">{{typeof messagenumber}} <!-- 输入内容转nuber类型 -->
+      <input type="text" v-model.trim="messagetrim">{{messagetrim}} <!-- 去除输入内容两边的空格 -->
+
+      <h2>v-model:radio 例子</h2>
+      <label for="male">
+        <input type="radio" id="male"  value="男" v-model="sex">男
+      </label>
+      <label for="female">
+        <input type="radio" id="female"  value="女" v-model="sex">女
+      </label>number
+      <p>{{sex}}</p>
+
+      <h2>v-model:select 例子</h2>
+      <select name="shuiguo" v-model="fruit">
+        <option value="苹果">苹果</option>
+        <option value="香蕉">香蕉</option>
+        <option value="榴莲">榴莲</option>
+      </select>
+      <p>{{fruit}}</p>
+
+    </div>
+
+    <!-- built files will be auto injected -->
+<script>
+const app =new Vue({
+  el: '#app',
+  data: {
+    sex:"",
+    fruit:[],
+    messagenumber:null,
+    messagelazy:null,
+    messagetrim:null,
+    message: ["海王1","海王2","海王3","海王4"],
+    message1: null ,
+    isAction: null,
+    color: {color:'red'},
+    fontSize:{fontSize:'60px'},
+    one:[
+      {id:001,name:"one",add:123},
+      {id:002,name:"two",add:456},
+      {id:003,name:"three",add:789},
+
+    ],
+    name: "abc",
+    panduan:true,
+  },
+  methods:{
+    bian:function(){
+      this.isAction=index
+    },
+    zhi(index){
+      this.isAction=index
+
+    },
+    qu(event){
+      console.log(event)
+    }
+    // fun:function(event){
+    //   var keyCode = event.keyCode;
+    //  if(keyCode < 48  || keyCode > 57){
+    //   //不让键盘的按键起作用
+    //    event.preventDefault();
+    //    }
+    // }
+    ,
+    pan(){
+      this.panduan=!this.panduan
+    }
+  },
+  computed:{
+    three(){
+      return this.one + " "+this.two
+    },
+    price(){
+      let flag =0
+      for(let i=0;i<this.one.length;i++){
+        flag = flag + this.one[i].add
+      }
+      console.log(flag)
+      return flag
+    }
+
+  }
+})
+console.log(app.name)
+app.name = "kill";
+console.log(app.name)
+
+
+    </script>
+  </body>
+</html>
